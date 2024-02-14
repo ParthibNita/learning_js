@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/todoModified.css">
+    <title>Notes App</title>
+</head>
+
+<body>
+    <main class="main">
+        <h1> Write Your Tasks</h1>
+        <section class="todo">
+            <form action="/notes" id="forms">
+                <input type="text" name="add" id="new" placeholder="New task" required>
+                <button class="bttn formButton add">Add</button>
+            </form>
+            <h2>Your List will be displayed below</h2>
+            <ul class="list">
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <button class="bttn footerButton finish">Finish</button>
+        <button class="bttn footerButton newList">New List</button>
+    </footer>
+
+    <script src="../JAVASCRIPT/todoModified.js"></script>
+</body>
+
+</html>
