@@ -5,7 +5,7 @@ console.log('Hello');
 // variables: use 'let'(good practice) OR 'var'
 let name = 'PARTHIB';
 let age = 20;
-
+//var has gobal scope which sometimes create a problem
 
 //constants: remain constant throughout the program
 const country = 'INDIA';
