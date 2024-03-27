@@ -1,6 +1,6 @@
-# Project 1
-
-## solution:
+# Project 1:
+## >Background Change along with time update
+### solution:
 
 ``` html
 <!DOCTYPE html>
@@ -31,6 +31,13 @@
             border-radius: 5px;
             font-size: 25px;
         }
+        .bttn {
+            padding: 1em 3em;
+        }
+
+        .bttn:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -38,6 +45,11 @@
     <section class="container">
         <h1>Live Time Update and Background Change</h1>
         <div class="clock">
+        </div>
+        <div class="button">
+            <button class="start bttn">Start</button>
+            <button class="stop bttn">Stop</button>
+            <button class="default bttn">Default</button>
         </div>
     </section>
 </body>
@@ -53,12 +65,33 @@
         return `rgb(${r},${g},${b})`
     }
 
-    setInterval(() => {
-        const time = new Date()
-        clock.innerHTML = time.toLocaleString()
+    clock.innerHTML = new Date().toLocaleTimeString()
+    
+    function startChange() {
+        clock.innerHTML = new Date().toLocaleTimeString()
         clock.style.backgroundColor = randColor()
         document.body.style.backgroundColor = randColor()
-    }, 1000);
+    }
+
+    let interval;
+    document.querySelector('.start').
+        addEventListener('click', () => {
+            if (!interval) interval = setInterval(startChange, 1000);
+        }, false)
+
+    function stopInterval() {
+        clearInterval(interval)
+        interval = null
+    }
+    document.querySelector('.stop').
+        addEventListener('click', stopInterval, false)
+
+    document.querySelector('.default').
+        addEventListener('click', function () {
+            stopInterval()
+            document.body.style.backgroundColor = '#414141'
+            clock.style.backgroundColor = '#e76f51'
+        }, false)
 
 </script>
 
@@ -66,8 +99,8 @@
 ```
 
 # Project 2
-
-## solution
+## >Guess the number Game
+### solution
 
 ```html
 <!DOCTYPE html>
@@ -238,6 +271,5 @@ function newGame() {
         playGame = true;
     });
 }
-
 
 ```
