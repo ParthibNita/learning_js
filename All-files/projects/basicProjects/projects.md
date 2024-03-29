@@ -273,3 +273,120 @@ function newGame() {
 }
 
 ```
+
+# Project 3
+## Make your card
+### solution
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #212121;
+            color: white;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .inputText {
+            margin-bottom: 1em;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            background-color: #dda15e;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 0.5em 1em;
+        }
+
+        img {
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Make Your Card</h1>
+    <form action="#" class="form">
+        <label for="details" class="input center">Your Github Username</label>
+        <input type="text" name="inputText" id="details" class="inputText center" placeholder="username">
+        <input type="submit" class="submit center" value="Submit"></input>
+    </form>
+    <div class="card" style="display: none;">
+        <img alt="Avatar" style="width:100%" class="img">
+        <div class="container">
+            <h4></h4>
+            <p></p>
+        </div>
+    </div>
+</body>
+<script>
+
+    const input = document.querySelector('.inputText')
+    const body = document.querySelector('body')
+    const h1 = document.querySelector('h1')
+
+    document.querySelector('.submit').
+        addEventListener('click', function (e) {
+            e.preventDefault();
+            if (input.value) changes()
+
+            else alert('Please fill out this field')
+        })
+
+    function changes() {
+        body.style.backgroundColor = '#fefae0'
+        body.style.padding = '1em 10em'
+        h1.innerText = 'Here is your Card'
+        h1.style.color = '#414141'
+        document.querySelector('.form').style.display = 'none'
+        document.querySelector('.card').style.display = 'block'
+        state()
+    }
+
+    function state() {
+        const requestUrl = `https://api.github.com/users/${input.value}`
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', requestUrl)
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                const data = JSON.parse(this.responseText)
+                const avatar = data.avatar_url
+                document.querySelector('.img').src = avatar
+                document.querySelector('h4').innerHTML = `<b>${data.name}</b>`
+                document.querySelector('p').innerHTML = `Followers: ${data.followers}`
+            }
+        }
+        xhr.send();
+        input.value = ''
+    }
+</script>
+
+</html>
+```
